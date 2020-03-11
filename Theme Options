@@ -1,3 +1,35 @@
+function tailor_header_footer(){
+	$prefix = '_tailor_';
+
+	$cmb = new_cmb2_box( array(
+		'id'           => $prefix . 'theme_options',
+		'title'        => __( 'Theme Option', 'tailor' ),
+		'show_on' => array( 'options-page' => array( $prefix . 'theme_options', ), ),
+		'context'      => 'normal',
+		'priority'     => 'default',
+	) );
+
+	$cmb->add_field( array(
+		'name' => __( 'Header Content', 'tailor' ),
+		'id' =>'header_content',
+		'type' => 'text',
+	) );
+
+
+	$cmb->add_field( array(
+		'name' => __( 'Header Call', 'tailor' ),
+		'id' =>'header_call',
+		'type' => 'text',
+	) );
+
+}
+
+add_action( 'cmb2_init', 'tailor_header_footer' );
+
+------------------------------------------
+cmb2 init end
+------------------------------------------
+
 if ( ! function_exists( 'tailor_get_option' ) ) :
 /**
  * Wrapper function around cmb2_get_option
@@ -22,12 +54,14 @@ function tailor_get_option( $key = '', $default = false ) {
 	return $val;
 }
 endif;
-
-
 -------------------
-use
+end function
 --------------------
 <?php 
   $header_title = tailor_get_option('title');
   $header_number = tailor_get_option('number');
  ?>
+ 
+ -------------------
+end use
+--------------------
